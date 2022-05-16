@@ -5,7 +5,7 @@
 
 - Choose password length.
 
-- Character complexity (Symbols, Numerals...).
+- Character complexity (Symbols, Numerals...)
 
 - Memorable password option.
 
@@ -17,7 +17,7 @@
 
 - Check for weak complexity and common passwords.
 
-- Detect possible **sensitive information** in the password (ex: Dates, Credit Card numbers).
+- Detect possible **sensitive information** in the password (ex: Dates, Credit Card numbers)
 
 - The option to fortify the password while retaining as much of the original password as possible.
 
