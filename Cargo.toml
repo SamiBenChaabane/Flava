@@ -6,11 +6,11 @@ edition = "2021"
 [profile.release]
 opt-level = 3
 debug = false
-strip = 'symbols'
+strip = true
 debug-assertions = false
 overflow-checks = false
 lto = true
 panic = 'unwind'
 incremental = false
-codegen-units = 16
+codegen-units = 1
 rpath = false
