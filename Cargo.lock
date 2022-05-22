@@ -32,6 +32,7 @@ version = "0.1.0"
 dependencies = [
  "ansi_term",
  "rand",
+ "rand_chacha",
  "regex",
 ]
 
