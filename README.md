@@ -4,14 +4,11 @@
 ### Generate, Analyze and Fortify passwords:
 
 - Check for **weak** **patterns** in passwords, like **keyboard** **swipes** (ex: "QWERTY").
-
 - Check for weak complexity.
-
 - Detect possible **sensitive information** in the password (ex: Dates, Credit Card numbers).
-
 - Fortify passwords by replacing weak patterns.
+- Generate Passwords.
 
--Generate Alphanumerical passwords.
 
 
 
