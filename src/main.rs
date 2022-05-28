@@ -1,22 +1,17 @@
+mod display;
 mod generation;
-use ansi_term::Colour::Fixed;
+use display::display_password;
 use generation::password_gen;
+use std::env;
+
 fn main() {
-    let mut table_width: u8 = 0;
+    let default: usize = 16;
+    let args: Vec<String> = env::args().collect();
 
-    print!("╭");
-    while table_width != 14 {
-        print!("─");
-        table_width += 1;
+    if args.len() < 2 {
+        display_password(password_gen(&default));
+    } else {
+        let password_length: usize = args[1].parse::<usize>().unwrap();
+        display_password(password_gen(&password_length));
     }
-
-    print!("╮\n│ {} │\n╰", Fixed(41).paint(password_gen()));
-
-    table_width = 0;
-
-    while table_width != 14 {
-        print!("─");
-        table_width += 1;
-    }
-    println!("╯");
 }
