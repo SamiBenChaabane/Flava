@@ -1,12 +1,13 @@
 mod analysis;
 mod display;
 mod generation;
+
 use analysis::password_analysis;
 use display::display_password;
 use generation::password_gen;
 use std::env;
+
 fn main() {
-    //password_analysis();
     let args: Vec<String> = env::args().collect();
     match args.len() {
         1 => display_password(password_gen(&16)),
