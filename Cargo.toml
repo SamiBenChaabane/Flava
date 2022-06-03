@@ -3,7 +3,7 @@ name = "flava"
 version = "0.1.0"
 authors = ["Sami Ben Chaabane <sami.ben.chaabane10@gmail.com>"]
 description = "A simple password toolkit to analyze and generate passwords."
-readme = "https://github.com/SamiBenChaabane/Flava#readme="
+readme = "README.md"
 repository = "https://github.com/SamiBenChaabane/Flava"
 edition = "2021"
 license = "BSD-3-Clause"
