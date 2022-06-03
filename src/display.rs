@@ -27,48 +27,58 @@ pub fn display_password(mut password: String) {
 
 pub fn display_analysis(password: &String) {
     let table_width = password.len();
-    let mut sensitive_table_width = 31;
+    let mut sensitive_table_width = 30;
     let valid_matches = password_analysis(&password);
-    print!("{}", Cyan.paint(format!("╭{:─^table_width$}╮\n", "")));
-    print!(
-        "{}{password:^table_width$}{}",
-        Cyan.paint("│"),
-        Cyan.paint("│\n")
-    );
-    print!("{}", Cyan.paint(format!("╰{:─^table_width$}╯\n", " ↓ ")));
+    if password.len() > 2 {
+        println!("{}", Cyan.paint(format!("╭{:─^table_width$}╮", "")));
+        println!(
+            "{}{password:^table_width$}{}",
+            Cyan.paint("│"),
+            Cyan.paint("│")
+        );
+        println!("{}", Cyan.paint(format!("╰{:─^table_width$}╯", " ↓ ")));
+    } else {
+        println!("{}", Cyan.paint(format!("╭{:─^table_width$}╮", "")));
+        println!(
+            "{}{password:^table_width$}{}",
+            Cyan.paint("│"),
+            Cyan.paint("│")
+        );
+        println!("{}", Cyan.paint(format!(" ↓ ")));
+    }
 
     match valid_matches.len() {
         0 => {
-            print!(
+            println!(
                 "{}",
-                Cyan.paint(format!("╭{:─^sensitive_table_width$}╮\n", ""))
+                Cyan.paint(format!("╭{:─^sensitive_table_width$}╮", ""))
             );
-            print!(
+            println!(
                 "{}{:^table_width$}{}",
                 Cyan.paint("│"),
-                Green.paint("Sensitive Information Not Found"),
-                Cyan.paint("│\n")
+                Green.paint("No Sensitive Information Found"),
+                Cyan.paint("│")
             );
-            print!(
+            println!(
                 "{}",
-                Cyan.paint(format!("╰{:─^sensitive_table_width$}╯\n", ""))
+                Cyan.paint(format!("╰{:─^sensitive_table_width$}╯", ""))
             );
         }
         _ => {
             sensitive_table_width = 27;
-            print!(
+            println!(
                 "{}",
-                Cyan.paint(format!("╭{:─^sensitive_table_width$}╮\n", ""))
+                Cyan.paint(format!("╭{:─^sensitive_table_width$}╮", ""))
             );
-            print!(
+            println!(
                 "{}{:^table_width$}{}",
                 Cyan.paint("│"),
                 Yellow.paint("Sensitive Information Found"),
-                Cyan.paint("│\n")
+                Cyan.paint("│")
             );
-            print!(
+            println!(
                 "{}",
-                Cyan.paint(format!("╰{:─^sensitive_table_width$}╯\n", ""))
+                Cyan.paint(format!("╰{:─^sensitive_table_width$}╯", ""))
             );
         }
     }
