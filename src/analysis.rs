@@ -1,6 +1,6 @@
 use lazy_static::lazy_static;
 use regex::RegexSet;
-pub fn password_analysis(password: &String) -> Vec<usize> {
+pub fn password_analysis(password: &str) -> Vec<usize> {
     /*
     -Optimize
     -

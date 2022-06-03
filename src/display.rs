@@ -28,7 +28,7 @@ pub fn display_password(mut password: String) {
 pub fn display_analysis(password: &String) {
     let table_width = password.len();
     let mut sensitive_table_width = 30;
-    let valid_matches = password_analysis(&password);
+    let valid_matches = password_analysis(password);
     if password.len() > 2 {
         println!("{}", Cyan.paint(format!("╭{:─^table_width$}╮", "")));
         println!(
@@ -44,7 +44,7 @@ pub fn display_analysis(password: &String) {
             Cyan.paint("│"),
             Cyan.paint("│")
         );
-        println!("{}", Cyan.paint(format!(" ↓ ")));
+        println!("{}", Cyan.paint(" ↓ "));
     }
 
     match valid_matches.len() {
