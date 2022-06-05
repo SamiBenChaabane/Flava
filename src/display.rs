@@ -44,7 +44,7 @@ pub fn display_analysis(password: &String) {
             Cyan.paint("│"),
             Cyan.paint("│")
         );
-        println!("{}", Cyan.paint(" ↓ "));
+        println!("{}", Cyan.paint(format!("╰{:─^table_width$}╯", "")));
     }
 
     match valid_matches.len() {
