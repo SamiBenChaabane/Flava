@@ -12,7 +12,7 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     match args.len() {
         1 => display_password(password_gen(&16)),
-        2 => match &args[1][0..2] {
+        2 => match args[1].as_str() {
             "-c" => {
                 let mut password = String::new();
                 io::stdin()
@@ -26,7 +26,7 @@ fn main() {
             }
             _ => println!("Invalid Arguments"),
         },
-        3 => match &args[1][0..2] {
+        3 => match args[1].as_str() {
             "-l" => match args[2].parse::<usize>() {
                 Ok(v) => display_password(password_gen(&v)),
                 _ => println!("Invalid Arguments"),
