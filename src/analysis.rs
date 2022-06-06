@@ -1,15 +1,37 @@
 use lazy_static::lazy_static;
-use regex::RegexSet;
-pub fn password_analysis(password: &str) -> Vec<usize> {
-    lazy_static! {
-        static ref SENSITIVE_INFO: RegexSet = RegexSet::new(&[
-        //Enhance this regex to match valid dates without punctuation.
-        r"[0-9]{4}-(((0[13578]|(10|12))-(0[1-9]|[1-2][0-9]|3[0-1]))|(02-(0[1-9]|[1-2][0-9]))|((0[469]|11)-(0[1-9]|[1-2][0-9]|30)))",
-        r"(?i)[a-z|1-9]+@[a-z]+\.",
-        r"(4[0-9]{12}(?:[0-9]{3})?$)|(^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$)|(3[47][0-9]{13})|(^3(?:0[0-5]|[68][0-9])[0-9]{11}$)|(^6(?:011|5[0-9]{2})[0-9]{12}$)|(^(?:2131|1800|35\d{3})\d{11})",
-        ])
-        .unwrap();
+use regex::Regex;
+
+pub struct PasswordReport {
+    pub email_captures: Vec<String>,
+    pub dates_captures: Vec<String>,
+    pub credit_card_numbers_captures: Vec<String>,
+}
+impl PasswordReport {
+    pub fn password_analysis(&mut self, password: &str) {
+        lazy_static! {
+            static ref EMAILS: Regex = Regex::new(
+                r"([a-z0-9_+]([a-z0-9_+.]*[a-z0-9_+])?)@([a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.(com|fr|it|tn|[a-z]{2,6}))",
+                )
+            .unwrap();
+            static ref DATES: Regex = Regex::new(
+                r"[0-9]{4}-(((0[13578]|(10|12))-(0[1-9]|[1-2][0-9]|3[0-1]))|(02-(0[1-9]|[1-2][0-9]))|((0[469]|11)-(0[1-9]|[1-2][0-9]|30)))",
+                )
+            .unwrap();
+            static ref CREDIT_CARD_NUMBERS: Regex = Regex::new(
+                r"(4[0-9]{12}(?:[0-9]{3})?$)|(^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$)|(3[47][0-9]{13})|(^3(?:0[0-5]|[68][0-9])[0-9]{11}$)|(^6(?:011|5[0-9]{2})[0-9]{12}$)|(^(?:2131|1800|35\d{3})\d{11})",
+                )
+            .unwrap();
+        }
+        //Maybe implement a workaround to use RegexSet instead of looping over every regex to get the capture.
+        for capture in EMAILS.captures_iter(password) {
+            self.email_captures.push(capture[0].to_string());
+        }
+        for capture in DATES.captures_iter(password) {
+            self.dates_captures.push(capture[0].to_string());
+        }
+        for capture in CREDIT_CARD_NUMBERS.captures_iter(password) {
+            self.credit_card_numbers_captures
+                .push(capture[0].to_string());
+        }
     }
-    let valid_matches: Vec<usize> = SENSITIVE_INFO.matches(password).into_iter().collect();
-    valid_matches
 }

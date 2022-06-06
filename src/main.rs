@@ -1,7 +1,7 @@
 mod analysis;
 mod display;
 mod generation;
-use analysis::password_analysis;
+
 use display::display_analysis;
 use display::display_password;
 use generation::password_gen;
@@ -18,7 +18,11 @@ fn main() {
                 io::stdin()
                     .read_line(&mut password)
                     .expect("Invalid character(s)");
-                display_analysis(password.trim());
+                if password.trim().is_empty() {
+                    println!("No password typed.");
+                } else {
+                    display_analysis(password.trim());
+                }
             }
             _ => println!("Invalid Arguments"),
         },
