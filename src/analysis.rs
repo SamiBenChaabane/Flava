@@ -10,9 +10,12 @@ pub struct PasswordReport {
 }
 impl PasswordReport {
     pub fn password_analysis(&mut self, password: &str) {
+        /*
+        The reason for using to literals to detect TLDs is that iterating over capture groups returns none overlapping captures so  if two emails were next to each other in the password a TLD could eat up part of the next email or worse, it could eat it all up and make it undetectable.
+         */
         lazy_static! {
             static ref EMAILS: Regex = Regex::new(
-                r"([a-z0-9_+]([a-z0-9_+.]*[a-z0-9_+])?)@([a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.(com|net|tn|it|fr|jp|co\.uk|com\.br|de|ru|br|co\.in|it|es|in|ca|ch|com\.au|co\.jp|nl|com\.ar|com\.mx|nl|co\.id|com\.sg|net\.au))",
+                r"[a-z0-9_+[\.]{0,1}?+]{1,32}@([a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.(com|net|tn|it|fr|jp|co\.uk|com\.br|de|ru|br|co\.in|it|es|in|ca|ch|com\.au|co\.jp|nl|com\.ar|com\.mx|nl|co\.id|com\.sg|net\.au))",
                 )
             .unwrap();
             static ref DATES: Regex = Regex::new(
