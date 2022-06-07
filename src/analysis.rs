@@ -15,7 +15,7 @@ impl PasswordReport {
          */
         lazy_static! {
             static ref EMAILS: Regex = Regex::new(
-                r"[a-z0-9_+[\.]{0,1}?+]{1,32}@([a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.(com|net|tn|it|fr|jp|co\.uk|com\.br|de|ru|br|co\.in|it|es|in|ca|ch|com\.au|co\.jp|nl|com\.ar|com\.mx|nl|co\.id|com\.sg|net\.au))",
+                r"[a-z0-9_+[\.]{0,1}?+]{1,32}@([a-z0-9]+([\-]{1}[a-z0-9]+)*\.(com|net|tn|it|fr|jp|co\.uk|com\.br|de|ru|br|co\.in|it|es|in|ca|ch|com\.au|co\.jp|nl|com\.ar|com\.mx|nl|co\.id|com\.sg|net\.au))",
                 )
             .unwrap();
             static ref DATES: Regex = Regex::new(
