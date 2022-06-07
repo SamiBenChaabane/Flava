@@ -55,20 +55,24 @@ pub fn display_analysis(password: &str) {
         || !password_report.email_captures.is_empty()
         || !password_report.email_captures.is_empty()
     {
-        sensitive_table_width = 37;
+        sensitive_table_width = 40;
         println!(
             "{}",
-            Cyan.paint(format!("╭{:─^sensitive_table_width$}╮", ""))
+            Yellow.paint(format!(
+                "╭{:─^sensitive_table_width$}╮",
+                "Sensitive Information Found"
+            ))
         );
-        println!(
-            "{}{:^table_width$}{}",
-            Cyan.paint("│"),
-            Yellow.paint("Sensitive Information Have Been Found"),
-            Cyan.paint("│")
-        );
+        for caps in password_report.email_captures {
+            println!(
+                "{}",
+                Yellow.paint(format!("│{caps: <sensitive_table_width$}│"))
+            );
+        }
+
         println!(
             "{}",
-            Cyan.paint(format!("╰{:─^sensitive_table_width$}╯", ""))
+            Yellow.paint(format!("╰{:─^sensitive_table_width$}╯", ""))
         );
     } else {
         println!(
@@ -76,7 +80,7 @@ pub fn display_analysis(password: &str) {
             Cyan.paint(format!("╭{:─^sensitive_table_width$}╮", ""))
         );
         println!(
-            "{}{:^table_width$}{}",
+            "{}{}{}",
             Cyan.paint("│"),
             Green.paint("No Sensitive Information Found"),
             Cyan.paint("│")

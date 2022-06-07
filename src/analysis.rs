@@ -2,15 +2,17 @@ use lazy_static::lazy_static;
 use regex::Regex;
 
 pub struct PasswordReport {
+    //Sensitive info vectors
     pub email_captures: Vec<String>,
     pub dates_captures: Vec<String>,
     pub credit_card_numbers_captures: Vec<String>,
+    //Weak complexity members
 }
 impl PasswordReport {
     pub fn password_analysis(&mut self, password: &str) {
         lazy_static! {
             static ref EMAILS: Regex = Regex::new(
-                r"([a-z0-9_+]([a-z0-9_+.]*[a-z0-9_+])?)@([a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.(com|fr|it|tn|[a-z]{2,6}))",
+                r"([a-z0-9_+]([a-z0-9_+.]*[a-z0-9_+])?)@([a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.(com|net|tn|it|fr|jp|co\.uk|com\.br|de|ru|br|co\.in|it|es|in|ca|ch|com\.au|co\.jp|nl|com\.ar|com\.mx|nl|co\.id|com\.sg|net\.au))",
                 )
             .unwrap();
             static ref DATES: Regex = Regex::new(
