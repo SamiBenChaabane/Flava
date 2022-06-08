@@ -2,6 +2,7 @@ use crate::analysis::PasswordReport;
 use ansi_term::Colour::Cyan;
 use ansi_term::Colour::Green;
 use ansi_term::Colour::Yellow;
+
 pub fn display_password(mut password: String) {
     let mut table_width: usize = password.len();
     if password.len() > 80 {
@@ -50,8 +51,8 @@ pub fn display_analysis(password: &str) {
     }
 
     if !password_report.email_captures.is_empty()
-        || !password_report.email_captures.is_empty()
-        || !password_report.email_captures.is_empty()
+        || !password_report.dates_captures.is_empty()
+        || !password_report.credit_card_numbers_captures.is_empty()
     {
         sensitive_table_width = 40;
         println!(
@@ -67,7 +68,18 @@ pub fn display_analysis(password: &str) {
                 Yellow.paint(format!("│{caps: <sensitive_table_width$}│"))
             );
         }
-
+        for caps in password_report.dates_captures {
+            println!(
+                "{}",
+                Yellow.paint(format!("│{caps: <sensitive_table_width$}│"))
+            );
+        }
+        for caps in password_report.credit_card_numbers_captures {
+            println!(
+                "{}",
+                Yellow.paint(format!("│{caps: <sensitive_table_width$}│"))
+            );
+        }
         println!(
             "{}",
             Yellow.paint(format!("╰{:─^sensitive_table_width$}╯", ""))

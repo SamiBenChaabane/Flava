@@ -15,11 +15,12 @@ impl PasswordReport {
          */
         lazy_static! {
             static ref EMAILS: Regex = Regex::new(
-                r"[a-z0-9_+[\.]{0,1}?+]{1,32}@([a-z0-9]+([\-]{1}[a-z0-9]+)*\.(com|net|tn|it|fr|jp|co\.uk|com\.br|de|ru|br|co\.in|it|es|in|ca|ch|com\.au|co\.jp|nl|com\.ar|com\.mx|nl|co\.id|com\.sg|net\.au))",
+                //Reorder these so they are more readable
+                r"[a-z0-9+[\.]{0,1}?+]{1,32}@([a-z0-9]+([\-]{1}[a-z0-9]+)*\.(com|net|tn|it|fr|jp|ar|co\.uk|com\.br|de|ru|br|co\.in|it|es|in|ca|ch|com\.au|co\.jp|nl|com\.ar|com\.mx|nl|co\.id|com\.sg|net\.au|io|org|com\.tn|com\.fr|int\.ar|net\.ar|org\.ar|au|net\.au|nz|net\.nz|com\.nz|com\.es|net\.es|co))",
                 )
             .unwrap();
             static ref DATES: Regex = Regex::new(
-                r"[0-9]{4}-(((0[13578]|(10|12))-(0[1-9]|[1-2][0-9]|3[0-1]))|(02-(0[1-9]|[1-2][0-9]))|((0[469]|11)-(0[1-9]|[1-2][0-9]|30)))",
+                r"[0-9]{4}[\.|\-|\\|/]{0,1}?+(((0[13578]|(10|12))[\.|\-|\\|/]{0,1}?+(0[1-9]|[1-2][0-9]|3[0-1]))|(02-(0[1-9]|[1-2][0-9]))|((0[469]|11)[\.|\-|\\|/]{0,1}?+(0[1-9]|[1-2][0-9]|30)))",
                 )
             .unwrap();
             static ref CREDIT_CARD_NUMBERS: Regex = Regex::new(
