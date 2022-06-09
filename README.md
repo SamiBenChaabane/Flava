@@ -3,9 +3,9 @@
 # A Simple password toolkit
 ### Analyze and Generate passwords:
 
+- Detect possible **sensitive information** in passwords (Dates, Credit Card numbers and Emails).
 - Check for **weak** **patterns** in passwords, like **keyboard** **swipes** (ex: "QWERTY").
 - Check for weak complexity.
-- Detect possible **sensitive information** in the password (Dates, Credit Card numbers and Emails).
 - Generate Passwords.
 
 
