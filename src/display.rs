@@ -25,11 +25,13 @@ pub fn display_password(mut password: String) {
 
 pub fn display_analysis(password: &str) {
     let table_width = password.len();
-    let mut sensitive_table_width = 30;
+    let mut general_table_width = 30;
+    let complexity_table_width = 21;
     let mut password_report = PasswordReport {
         email_captures: vec![],
         dates_captures: vec![],
         credit_card_numbers_captures: vec![],
+        entropy: 0.0,
     };
     password_report.password_analysis(password);
     if password.len() > 2 {
@@ -42,7 +44,7 @@ pub fn display_analysis(password: &str) {
         println!("{}", Cyan.paint(format!("╰{:─^table_width$}╯", " ↓ ")));
     } else {
         println!("{}", Cyan.paint(format!("╭{:─^table_width$}╮", "")));
-        print!(
+        println!(
             "{}{password:^table_width$}{}",
             Cyan.paint("│"),
             Cyan.paint("│")
@@ -54,50 +56,58 @@ pub fn display_analysis(password: &str) {
         || !password_report.dates_captures.is_empty()
         || !password_report.credit_card_numbers_captures.is_empty()
     {
-        sensitive_table_width = 40;
+        general_table_width = 40;
         println!(
             "{}",
             Yellow.paint(format!(
-                "╭{:─^sensitive_table_width$}╮",
+                "╭{:─^general_table_width$}╮",
                 "Sensitive Information Found"
             ))
         );
         for caps in password_report.email_captures {
             println!(
                 "{}",
-                Yellow.paint(format!("│{caps: <sensitive_table_width$}│"))
+                Yellow.paint(format!("│{caps: <general_table_width$}│"))
             );
         }
         for caps in password_report.dates_captures {
             println!(
                 "{}",
-                Yellow.paint(format!("│{caps: <sensitive_table_width$}│"))
+                Yellow.paint(format!("│{caps: <general_table_width$}│"))
             );
         }
         for caps in password_report.credit_card_numbers_captures {
             println!(
                 "{}",
-                Yellow.paint(format!("│{caps: <sensitive_table_width$}│"))
+                Yellow.paint(format!("│{caps: <general_table_width$}│"))
             );
         }
         println!(
             "{}",
-            Yellow.paint(format!("╰{:─^sensitive_table_width$}╯", ""))
+            Yellow.paint(format!("╰{:─^general_table_width$}╯", ""))
         );
     } else {
-        println!(
-            "{}",
-            Cyan.paint(format!("╭{:─^sensitive_table_width$}╮", ""))
-        );
+        println!("{}", Cyan.paint(format!("╭{:─^general_table_width$}╮", "")));
         println!(
             "{}{}{}",
             Cyan.paint("│"),
             Green.paint("No Sensitive Information Found"),
             Cyan.paint("│")
         );
-        println!(
-            "{}",
-            Cyan.paint(format!("╰{:─^sensitive_table_width$}╯", ""))
-        );
+        println!("{}", Cyan.paint(format!("╰{:─^general_table_width$}╯", "")));
     }
+    //Complexity Table
+    general_table_width = 30;
+    println!(
+        "{}",
+        Cyan.paint(format!("╭{:─^general_table_width$}╮", "Complexity"))
+    );
+    println!(
+        "{}",
+        Cyan.paint(format!(
+            "│Entropy: {:<complexity_table_width$}│",
+            password_report.entropy
+        ))
+    );
+    println!("{}", Cyan.paint(format!("╰{:─^general_table_width$}╯", "")));
 }
