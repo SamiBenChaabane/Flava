@@ -4,7 +4,6 @@
 ### Analyze and Generate passwords:
 
 - Detect possible **sensitive information** in passwords (Dates, Credit Card numbers and Emails).
-- Check for **weak** **patterns** in passwords, like **keyboard** **swipes** (ex: "QWERTY").
 - Check for weak complexity.
 - Generate Passwords.
 
