@@ -96,6 +96,7 @@ pub fn display_analysis(password: &str) {
         );
         println!("{}", Cyan.paint(format!("╰{:─^general_table_width$}╯", "")));
     }
+
     //Complexity Table
     general_table_width = 30;
     println!(
@@ -103,11 +104,13 @@ pub fn display_analysis(password: &str) {
         Cyan.paint(format!("╭{:─^general_table_width$}╮", "Complexity"))
     );
     println!(
-        "{}",
-        Cyan.paint(format!(
-            "│Entropy: {:<complexity_table_width$}│",
+        "{}{}{}",
+        Cyan.paint("│"),
+        Green.paint(format!(
+            "Entropy: {:<complexity_table_width$}",
             password_report.entropy
-        ))
+        )),
+        Cyan.paint("│"),
     );
     println!("{}", Cyan.paint(format!("╰{:─^general_table_width$}╯", "")));
 }
