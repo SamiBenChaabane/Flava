@@ -14,11 +14,6 @@ impl PasswordReport {
         let length: usize = password.len();
         lazy_static! {
             static ref EMAILS: Regex = Regex::new(
-                /*
-                The reason for using to literals to detect TLDs is that iterating over capture groups returns
-                none overlapping captures so if two emails were next to each other in the password a TLD could
-                eat up part of the next email or worse, it could eat it all up and make it undetectable.
-                */
                 r"(?i)[a-z0-9+[\.]{0,1}?+]{1,32}@([a-z0-9]+([\-]{1}[a-z0-9]+)*\.(com\.[a-z]{2,3}?|com|net\.[a-z]{2,3}?|net|co|co\.[a-z]{2,3}?|gov\.[a-z]{2,3}?|gov|org\.[a-z]{2,3}?|org|edu\.[a-z]{2,3}?|edu|[a-z]{2,3}))",
                 )
             .unwrap();

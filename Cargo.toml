@@ -8,7 +8,7 @@ repository = "https://github.com/SamiBenChaabane/Flava"
 edition = "2021"
 license = "BSD-3-Clause"
 keywords = ["password-generator", "password","password-strength","password-safety"]
-categories = ["command-line-utilities"]
+categories = ["command-line-utilities", "tui"]
 [dependencies]
 ansi_term = "0.12.1"
 rand = "0.8.5"

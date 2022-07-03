@@ -24,11 +24,16 @@ fn main() {
                     display_analysis(password.trim());
                 }
             }
+            "-n" => println!("{}", password_gen(&16)),
             _ => println!("Invalid Arguments"),
         },
         3 => match args[1].as_str() {
             "-l" => match args[2].parse::<usize>() {
                 Ok(v) => display_password(password_gen(&v)),
+                _ => println!("Invalid Arguments"),
+            },
+            "-ln" => match args[2].parse::<usize>() {
+                Ok(v) => println!("{}", password_gen(&v)),
                 _ => println!("Invalid Arguments"),
             },
             _ => println!("Invalid Arguments"),
